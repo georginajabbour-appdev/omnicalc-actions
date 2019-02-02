@@ -21,6 +21,14 @@ class WordCountController < ApplicationController
     # Your code goes above.
     # ================================================================================
 
+@character_count_with_spaces = @text.length
+
+@character_count_without_spaces = @text.gsub(/\s+/, "").length
+
+@word_count = @text.split.count
+
+@occurrences = @text.downcase.gsub(/[^a-z0-9\s]/i, "").split.count(@special_word)
+
     render("word_count_templates/word_count.html.erb")
   end
 

@@ -7,36 +7,66 @@ class StatsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer"
+    @sorted_numbers = @numbers.sort
 
-    @count = "Replace this string with your answer"
+    @count = @numbers.count
 
-    @minimum = "Replace this string with your answer"
+    @minimum = @numbers.min
 
-    @maximum = "Replace this string with your answer"
+    @maximum = @numbers.max
 
-    @range = "Replace this string with your answer"
+    @range = @maximum - @minimum
 
     # Median
     # ======
 
-    @median = "Replace this string with your answer"
+    
+    if @count.odd? then
+      
+  @median= @sorted_numbers[@count/2.round]
+  
+    elsif
+    
+  @median= (@sorted_numbers[@count/2.round] + @sorted_numbers[(@count/2.round)-1])/2
+  
+    end
+    
+    
 
-    @sum = "Replace this string with your answer"
+    @sum = @numbers.sum
 
-    @mean = "Replace this string with your answer"
+    @mean = @sum/@count
 
     # Variance
     # ========
 
-    @variance = "Replace this string with your answer"
+variance_vec = []
 
-    @standard_deviation = "Replace this string with your answer"
+@numbers.each do |num|
+  dif = num - @mean
+  sq_dif = dif ** 2
+  variance_vec.push(sq_dif)
+end
+
+@variance = variance_vec.sum/variance_vec.count
+
+    @standard_deviation = @variance**0.5
 
     # Mode
     # ====
 
     @mode = "Replace this string with your answer"
+    
+
+@mode = @sorted_numbers.first
+
+@numbers.each do |num|
+
+  if  num == @numbers[1+@numbers.index(num)]
+  @mode = num
+  end
+  
+end
 
     # ================================================================================
     # Your code goes above.
